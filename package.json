@@ -8,11 +8,17 @@
 	"scripts": {
 		"build": "wp-scripts build",
 		"format": "wp-scripts format",
+		"lint:css": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js",
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
 		"start": "wp-scripts start"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "^26.5.0"
-	}
+		"@wordpress/eslint-plugin": "^14.11.0",
+		"@wordpress/prettier-config": "^2.21.0",
+		"@wordpress/scripts": "^26.5.0",
+		"eslint-config-prettier": "^8.10.0"
+	},
+	"prettier": "@wordpress/prettier-config"
 }
