@@ -6,7 +6,7 @@
 	"title": "Layout Block",
 	"category": "custom",
 	"icon": "layout",
-	"description": "Boilerplate Block ready for customising.",
+	"description": "A block used to create top-notch layouts.",
 	"keywords": ["noble", "performs", "grid", "layout", "row", "column", "group"],
 	"supports": {
 		"html": false

@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name:       Custom Block Boilerplate
- * Description:       A block containing nothing but boilerplate. Use this as a starting point to create custom blocks.
+ * Plugin Name:       Noble Layout Block
+ * Description:       A block used to create top-notch layouts.
  * Requires at least: 6.1
  * Requires PHP:      7.0
  * Version:           1.0.0
@@ -20,7 +20,8 @@
  *
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
-function create_custom_block_boilerplate_block_init() {
+function create_noble_layout_block_init() {
 	register_block_type( __DIR__ . '/build' );
 }
-add_action( 'init', 'create_custom_block_boilerplate_block_init' );
+add_action( 'init', 'create_noble_layout_block_init' );
+die();
