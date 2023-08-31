@@ -24,4 +24,3 @@ function create_noble_layout_block_init() {
 	register_block_type( __DIR__ . '/build' );
 }
 add_action( 'init', 'create_noble_layout_block_init' );
-die();

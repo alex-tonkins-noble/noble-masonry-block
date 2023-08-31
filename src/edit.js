@@ -1,14 +1,22 @@
 import './editor.scss';
 import { __ } from '@wordpress/i18n';
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 
 export default function Edit() {
 	return (
-		<p {...useBlockProps()}>
-			{__(
-				'Custom Test Block – hello from the editor!',
-				'noble-layout-block'
-			)}
-		</p>
+		<>
+			<div {...useBlockProps()}>
+				<p>
+					{__(
+						'Custom Test Block - hello from the editor!',
+						'noble-layout-block'
+					)}
+				</p>
+				<InnerBlocks
+					allowedBlocks={['noble-performs/layout-block-column-block']}
+					orientation="horizontal"
+				/>
+			</div>
+		</>
 	);
 }
