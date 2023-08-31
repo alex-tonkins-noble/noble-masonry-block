@@ -7,7 +7,7 @@ export default function Edit() {
 		<p {...useBlockProps()}>
 			{__(
 				'Custom Test Block – hello from the editor!',
-				'custom-block-boilerplate'
+				'noble-layout-block'
 			)}
 		</p>
 	);

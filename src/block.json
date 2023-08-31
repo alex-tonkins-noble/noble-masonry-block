@@ -1,17 +1,17 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "custom-block/custom-block-boilerplate",
+	"name": "custom-block/noble-layout-block",
 	"version": "1.0.0",
-	"title": "Custom Block Boilerplate",
-	"category": "widgets",
-	"icon": "admin-users",
+	"title": "Layout Block",
+	"category": "custom",
+	"icon": "layout",
 	"description": "Boilerplate Block ready for customising.",
-	"keywords": [""],
+	"keywords": ["noble", "performs", "grid", "layout", "row", "column", "group"],
 	"supports": {
 		"html": false
 	},
-	"textdomain": "custom-block-boilerplate",
+	"textdomain": "noble-layout-block",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css"
