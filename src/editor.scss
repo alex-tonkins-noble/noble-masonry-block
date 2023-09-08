@@ -4,20 +4,21 @@
     &__inner {
         // Unset grid layout on wrong element on backend;
         display: block;
-    }
-
-    .block-editor-inner-blocks {
-        > .block-editor-block-list__layout {
-            @include grid.initiate-grid();
-
-            > .block-editor-block-list__block {
-                background-color: paleturquoise;
-                padding: 15px;
-            }
-
-            // Style the "new block appender" to be easier to click and use.
-            > .block-list-appender {
-                
+        
+        
+        > .block-editor-inner-blocks {
+            > .block-editor-block-list__layout {
+                @include grid.initiate-grid();
+    
+                > .block-editor-block-list__block {
+                    background-color: paleturquoise;
+                    padding: 15px;
+                }
+    
+                // Style the "new block appender" to be easier to click and use.
+                > .block-list-appender {
+                    
+                }
             }
         }
     }

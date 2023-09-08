@@ -1,5 +1,9 @@
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import {
+	useBlockProps,
+	InspectorControls,
+	InnerBlocks,
+} from '@wordpress/block-editor';
 import { ToggleControl, RangeControl, PanelBody } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
 
@@ -27,7 +31,7 @@ export default function Edit(props) {
 		const styles = [];
 
 		styles.push(
-			`.block-editor-block-list__block:has(#${backendBlockId}) {
+			`.wp-block-noble-performs-layout-block .block-editor-block-list__block:has(#${backendBlockId}) {
 				grid-column: span ${size.colValue};
 				grid-row: span ${size.rowValue};
 			}`
@@ -42,7 +46,7 @@ export default function Edit(props) {
 				// Ensuring the class is correct - backend structure differs massively from frontend
 				styles.push(
 					`@media (max-width: ${breakpoint.breakpointWidth}px) {
-						.block-editor-block-list__block:has(#${backendBlockId}) {
+						.wp-block-noble-performs-layout-block .block-editor-block-list__block:has(#${backendBlockId}) {
 							grid-column: span ${breakpoint.colValue};
 							grid-row: span ${breakpoint.rowValue};
 						}
@@ -181,7 +185,7 @@ export default function Edit(props) {
 			</InspectorControls>
 
 			<div className="layout-block-column-block__inner">
-				<span>Column</span>
+				<InnerBlocks orientation="vertical" />
 			</div>
 		</div>
 	);
