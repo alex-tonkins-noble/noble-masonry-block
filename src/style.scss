@@ -1,3 +1,12 @@
-.wp-block-custom-block-noble-layout-block {
-	
+@use './styles/mixins/initiate-grid' as grid;
+
+.wp-block-noble-performs-layout-block {
+	&__inner {
+        @include grid.initiate-grid();
+    }
+}
+
+.wp-block-noble-performs-layout-block-column-block {
+    background-color: paleturquoise;
+    padding: 15px;
 }

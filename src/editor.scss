@@ -1,9 +1,14 @@
+@use './styles/mixins/initiate-grid' as grid;
+
 .wp-block-noble-performs-layout-block {
+    &__inner {
+        // Unset grid layout on wrong element on backend;
+        display: block;
+    }
+
     .block-editor-inner-blocks {
         > .block-editor-block-list__layout {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            grid-gap: 15px;
+            @include grid.initiate-grid();
 
             > .block-editor-block-list__block {
                 background-color: paleturquoise;
@@ -12,15 +17,14 @@
 
             // Style the "new block appender" to be easier to click and use.
             > .block-list-appender {
-                bottom: 10px;
-                right: 10px;
+                
             }
         }
     }
 }
 
 // Style some info text so it's easier for the admin to see.
-.wp-block-noble-performs-layout-block-info-tagline {
+.info-tagline {
     color: #888888;
     font-style: italic;
 }

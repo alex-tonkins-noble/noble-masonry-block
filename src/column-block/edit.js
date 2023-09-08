@@ -1,11 +1,21 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import { ToggleControl, RangeControl, PanelBody } from '@wordpress/components';
+import { useEffect } from '@wordpress/element';
 
 export default function Edit(props) {
-	const { attributes, setAttributes } = props;
-	const { size, breakpoints } = attributes; // Define a single "breakpoints" object
-	const blockId = useBlockProps().id;
+	const { attributes, setAttributes, clientId } = props;
+	const { blockId, size, breakpoints } = attributes; // Define a single "breakpoints" object
+
+	// Define a separate blockId for the backend to target elements for backend styling.
+	const backendBlockId = useBlockProps().id;
+
+	// Save the block ID into an attribute so it can be used in the save file.
+	useEffect(() => {
+		if (!blockId) {
+			setAttributes({ blockId: `column-block-${clientId}` });
+		}
+	}, []);
 
 	// Function to update the attribute value
 	const updateBreakpoint = (key, value) => {
@@ -17,7 +27,7 @@ export default function Edit(props) {
 		const styles = [];
 
 		styles.push(
-			`.block-editor-block-list__block:has(#${blockId}) {
+			`.block-editor-block-list__block:has(#${backendBlockId}) {
 				grid-column: span ${size.colValue};
 				grid-row: span ${size.rowValue};
 			}`
@@ -32,7 +42,7 @@ export default function Edit(props) {
 				// Ensuring the class is correct - backend structure differs massively from frontend
 				styles.push(
 					`@media (max-width: ${breakpoint.breakpointWidth}px) {
-						.block-editor-block-list__block:has(#${blockId}) {
+						.block-editor-block-list__block:has(#${backendBlockId}) {
 							grid-column: span ${breakpoint.colValue};
 							grid-row: span ${breakpoint.rowValue};
 						}
@@ -60,6 +70,12 @@ export default function Edit(props) {
 				<PanelBody
 					title={__('Column Size', 'layout-block-column-block')}
 				>
+					<p className="info-tagline">
+						{__(
+							'Specify the default width and height of your column.',
+							'layout-block-column-block'
+						)}
+					</p>
 					<div className="better-range-styling-wrapper">
 						<RangeControl
 							label={__('Width', 'layout-block-column-block')}
@@ -93,9 +109,9 @@ export default function Edit(props) {
 						'layout-block-column-block'
 					)}
 				>
-					<p className="wp-block-noble-performs-layout-block-info-tagline">
+					<p className="info-tagline">
 						{__(
-							'Change the width and height of your columns on Mobile, Tablet and Desktop here.',
+							'Change the width and height of your columns on Mobile, Tablet and Desktop here - not mandatory, but highly advised.',
 							'layout-block-column-block'
 						)}
 					</p>

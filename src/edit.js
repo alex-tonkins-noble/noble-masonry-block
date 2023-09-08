@@ -6,10 +6,14 @@ export default function Edit() {
 	return (
 		<>
 			<div {...useBlockProps()}>
-				<InnerBlocks
-					allowedBlocks={['noble-performs/layout-block-column-block']}
-					orientation="horizontal"
-				/>
+				<div className="wp-block-noble-performs-layout-block__inner">
+					<InnerBlocks
+						allowedBlocks={[
+							'noble-performs/layout-block-column-block',
+						]}
+						orientation="horizontal"
+					/>
+				</div>
 			</div>
 		</>
 	);
