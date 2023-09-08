@@ -10,7 +10,18 @@
 	"keywords": ["noble", "performs", "grid", "layout", "row", "column", "group"],
 	"supports": {
 		"reusable": false,
-		"html": false
+		"html": false,
+		"color": {
+			"background": true,
+			"text": true,
+			"enableContrastChecker": true,
+			"gradients": true,
+			"link": true
+		},
+		"layout": {
+			"allowVerticalAlignment": true
+		},
+		"align": true
 	},
 	"parent": ["noble-performs/layout-block"],
 	"textdomain": "layout-block-column-block",
@@ -50,6 +61,10 @@
 					"label": "Desktop"
 				}
 			}
+		},
+		"verticalAlignment" : {
+			"type": "string",
+			"default": null
 		}
 	}
 }

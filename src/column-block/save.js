@@ -2,7 +2,11 @@ import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 
 export default function Save(props) {
 	const { attributes } = props;
-	const { blockId, size, breakpoints } = attributes;
+	const { blockId, size, breakpoints, verticalAlignment } = attributes;
+
+	const vAlignmentClass = verticalAlignment
+		? `is-vertically-aligned-${verticalAlignment}`
+		: null;
 
 	// Generate the inline styles
 	const generateInlineStyles = () => {
@@ -38,7 +42,10 @@ export default function Save(props) {
 	const inlineStyles = generateInlineStyles();
 
 	return (
-		<div id={blockId} {...useBlockProps.save()}>
+		<div
+			id={blockId}
+			{...useBlockProps.save({ className: vAlignmentClass })}
+		>
 			{/* Output the inline styles */}
 			{inlineStyles && <style>{inlineStyles}</style>}
 

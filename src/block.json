@@ -9,7 +9,14 @@
 	"description": "A block used to create top-notch layouts.",
 	"keywords": ["noble", "performs", "grid", "layout", "row", "column", "group"],
 	"supports": {
-		"html": false
+		"html": false,
+		"color": {
+			"background": true,
+			"text": true,
+			"enableContrastChecker": true,
+			"gradients": true,
+			"link": true
+		}
 	},
 	"textdomain": "noble-layout-block",
 	"editorScript": "file:./index.js",

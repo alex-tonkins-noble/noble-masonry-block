@@ -3,22 +3,26 @@ import {
 	useBlockProps,
 	InspectorControls,
 	InnerBlocks,
+	BlockControls,
+	BlockVerticalAlignmentToolbar,
 } from '@wordpress/block-editor';
 import { ToggleControl, RangeControl, PanelBody } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
 
 export default function Edit(props) {
-	const { attributes, setAttributes, clientId } = props;
-	const { blockId, size, breakpoints } = attributes; // Define a single "breakpoints" object
+	const { attributes, setAttributes } = props;
+	const { size, breakpoints, verticalAlignment } = attributes; // Define a single "breakpoints" object
+
+	const vAlignmentClass = verticalAlignment
+		? `is-vertically-aligned-${verticalAlignment}`
+		: null;
 
 	// Define a separate blockId for the backend to target elements for backend styling.
-	const backendBlockId = useBlockProps().id;
+	const blockPropsId = useBlockProps().id;
 
 	// Save the block ID into an attribute so it can be used in the save file.
 	useEffect(() => {
-		if (!blockId) {
-			setAttributes({ blockId: `column-block-${clientId}` });
-		}
+		setAttributes({ blockId: `${blockPropsId}` });
 	}, []);
 
 	// Function to update the attribute value
@@ -31,7 +35,7 @@ export default function Edit(props) {
 		const styles = [];
 
 		styles.push(
-			`.wp-block-noble-performs-layout-block .block-editor-block-list__block:has(#${backendBlockId}) {
+			`.wp-block-noble-performs-layout-block .block-editor-block-list__block:has(#${blockPropsId}) {
 				grid-column: span ${size.colValue};
 				grid-row: span ${size.rowValue};
 			}`
@@ -46,7 +50,7 @@ export default function Edit(props) {
 				// Ensuring the class is correct - backend structure differs massively from frontend
 				styles.push(
 					`@media (max-width: ${breakpoint.breakpointWidth}px) {
-						.wp-block-noble-performs-layout-block .block-editor-block-list__block:has(#${backendBlockId}) {
+						.wp-block-noble-performs-layout-block .block-editor-block-list__block:has(#${blockPropsId}) {
 							grid-column: span ${breakpoint.colValue};
 							grid-row: span ${breakpoint.rowValue};
 						}
@@ -66,9 +70,18 @@ export default function Edit(props) {
 	const inlineStyles = generateInlineStyles();
 
 	return (
-		<div {...useBlockProps({ className: 'testtest' })}>
+		<div {...useBlockProps({ className: vAlignmentClass })}>
 			{/* Output the inline styles */}
 			{inlineStyles && <style>{inlineStyles}</style>}
+
+			<BlockControls>
+				<BlockVerticalAlignmentToolbar
+					value={verticalAlignment}
+					onChange={(value) => {
+						setAttributes({ verticalAlignment: value });
+					}}
+				/>
+			</BlockControls>
 
 			<InspectorControls>
 				<PanelBody
