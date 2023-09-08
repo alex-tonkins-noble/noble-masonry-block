@@ -15,6 +15,38 @@
 	"parent": ["noble-performs/layout-block"],
 	"textdomain": "layout-block-column-block",
 	"attributes": {
-		
+		"size": {
+			"type": "object",
+			"default": {
+				"colValue": 12,
+				"rowValue": 1
+			}
+		},
+		"breakpoints": {
+			"type": "object",
+			"default": {
+				"sm": {
+					"colValue": 12,
+					"rowValue": 1,
+					"enabled": false,
+					"breakpointWidth": 576,
+					"label": "Mobile"
+				},
+				"md": {
+					"colValue": 12,
+					"rowValue": 1,
+					"enabled": false,
+					"breakpointWidth": 768,
+					"label": "Tablet"
+				},
+				"lg": {
+					"colValue": 12,
+					"rowValue": 1,
+					"enabled": false,
+					"breakpointWidth": 992,
+					"label": "Desktop"
+				}
+			}
+		}
 	}
 }

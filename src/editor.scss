@@ -1,3 +1,61 @@
-.wp-block-custom-block-noble-layout-block {
-	
+.wp-block-noble-performs-layout-block {
+    .block-editor-inner-blocks {
+        > .block-editor-block-list__layout {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-gap: 15px;
+
+            > .block-editor-block-list__block {
+                background-color: paleturquoise;
+                padding: 15px;
+            }
+
+            // Style the "new block appender" to be easier to click and use.
+            > .block-list-appender {
+                bottom: 10px;
+                right: 10px;
+            }
+        }
+    }
+}
+
+// Style some info text so it's easier for the admin to see.
+.wp-block-noble-performs-layout-block-info-tagline {
+    color: #888888;
+    font-style: italic;
+}
+
+// Style the Range Control area to better the admin UX
+.better-range-styling-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+    margin-bottom: 24px;
+
+    .components-range-control {
+        flex-grow: 1;
+        flex-shrink: 0;
+        margin-bottom: 0;
+
+        .components-base-control__field {
+            &, .components-base-control {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    > span {
+        flex: 0 0 50px;
+        height: 50px;
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 5px;
+        align-self: flex-end;
+        background: #e0e4ff;
+        border: 1px solid #b1bbff;
+    }
 }
