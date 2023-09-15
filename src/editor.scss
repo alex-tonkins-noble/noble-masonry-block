@@ -1,6 +1,8 @@
 @use './styles/mixins/initiate-grid' as grid;
 @use './styles/mixins/column-block' as col;
 
+$preview-mode-colour: #84dbf7;
+
 .wp-block-noble-performs-layout-block {
     &__inner {
         // Unset grid layout on wrong element on backend;
@@ -67,5 +69,47 @@
         align-self: flex-end;
         background: #e0e4ff;
         border: 1px solid #b1bbff;
+    }
+}
+
+// Style the Toolbar Dropdown Menu active items - put in place for the preview functionality.
+.popover-slot {
+    .components-popover {
+        .components-popover__content {
+            .components-dropdown-menu__menu {
+                .components-button {
+                    &.is-active {
+                        background-color: #007cba;
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Add some styles for when the admin is previewing a breakpoint.
+.preview-mode {
+    background: $preview-mode-colour;
+    box-shadow: 0 0 10px 0 $preview-mode-colour;
+    animation: glow 4s linear infinite;
+    padding: 15px;
+    border-radius: 10px;
+
+    &__text {
+        border-radius: 10px;
+        margin: 0 0 30px;
+        text-align: center;
+        font-weight: bold;
+    }
+}
+
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 10px 0 $preview-mode-colour;
+    }
+    
+    50% {
+        box-shadow: 0 0 60px 0 $preview-mode-colour;
     }
 }

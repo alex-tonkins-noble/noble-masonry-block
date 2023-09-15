@@ -10,8 +10,10 @@ import { ToggleControl, RangeControl, PanelBody } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
 
 export default function Edit(props) {
-	const { attributes, setAttributes } = props;
+	const { attributes, setAttributes, context } = props;
 	const { size, breakpoints, verticalAlignment } = attributes; // Define a single "breakpoints" object
+
+	const previewBreakpoints = context['noble-performs/layout-block/previews'];
 
 	const vAlignmentClass = verticalAlignment
 		? `is-vertically-aligned-${verticalAlignment}`
@@ -30,6 +32,15 @@ export default function Edit(props) {
 		setAttributes({ breakpoints: { ...breakpoints, [key]: value } });
 	};
 
+	const anyBreakpointIsActive = () => {
+		if (
+			previewBreakpoints &&
+			Object.values(previewBreakpoints).some((bp) => bp.active)
+		) {
+			return true;
+		}
+	};
+
 	// Function to generate the inline styles
 	const generateInlineStyles = () => {
 		const styles = [];
@@ -46,16 +57,26 @@ export default function Edit(props) {
 			const breakpoint = breakpoints[key];
 
 			if (breakpoint.enabled) {
-				// Generate the media query based on the breakpoint's min-width
-				// Ensuring the class is correct - backend structure differs massively from frontend
-				styles.push(
-					`@media (max-width: ${breakpoint.breakpointWidth}px) {
-						.wp-block-noble-performs-layout-block .block-editor-block-list__block:has(#${blockPropsId}) {
-							grid-column: span ${breakpoint.colValue};
-							grid-row: span ${breakpoint.rowValue};
-						}
-					}`
-				);
+				// Declare the Selector in which the grid columns and rows should be attached
+				// Also declare the grid columns and grid rows in their own variables, whilst adding "!important" to them if the respective breakpoint is in "preview mode"
+				// - Adding "!important" overrides every other breakpoints values.
+				const selector = `.wp-block-noble-performs-layout-block .block-editor-block-list__block:has(#${blockPropsId})`;
+				const gridColumn = `grid-column: span ${breakpoint.colValue}${
+					previewBreakpoints[key]?.active ? ' !important' : ''
+				}`;
+				const gridRow = `grid-row: span ${breakpoint.rowValue}${
+					previewBreakpoints[key]?.active ? ' !important' : ''
+				}`;
+
+				// Push the inline styles for each active breakpoint.
+				// If we are in preview mode, then DO NOT wrap the styles in a media query because we want the admin to see them without resizing their browser.
+				if (anyBreakpointIsActive()) {
+					styles.push(`${selector} { ${gridColumn}; ${gridRow}; }`);
+				} else {
+					styles.push(
+						`@media (max-width: ${breakpoint.breakpointWidth}px) { ${selector} { ${gridColumn}; ${gridRow}; } }`
+					);
+				}
 			}
 		}
 
@@ -70,10 +91,7 @@ export default function Edit(props) {
 	const inlineStyles = generateInlineStyles();
 
 	return (
-		<div {...useBlockProps({ className: vAlignmentClass })}>
-			{/* Output the inline styles */}
-			{inlineStyles && <style>{inlineStyles}</style>}
-
+		<>
 			<BlockControls>
 				<BlockVerticalAlignmentToolbar
 					value={verticalAlignment}
@@ -197,9 +215,18 @@ export default function Edit(props) {
 				</PanelBody>
 			</InspectorControls>
 
-			<div className="layout-block-column-block__inner">
-				<InnerBlocks orientation="vertical" />
+			<div
+				{...useBlockProps({
+					className: `${vAlignmentClass}`,
+				})}
+			>
+				{/* Output the inline styles */}
+				{inlineStyles && <style>{inlineStyles}</style>}
+
+				<div className="layout-block-column-block__inner">
+					<InnerBlocks orientation="vertical" />
+				</div>
 			</div>
-		</div>
+		</>
 	);
 }

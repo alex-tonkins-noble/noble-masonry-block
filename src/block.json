@@ -18,6 +18,28 @@
 			"link": true
 		}
 	},
+	"attributes": {
+		"previewBreakpoints": {
+			"type": "object",
+			"default": {
+				"lg": {
+					"active": false,
+					"label": "Desktop"
+				},
+				"md": {
+					"active": false,
+					"label": "Tablet"
+				},
+				"sm": {
+					"active": false,
+					"label": "Mobile"
+				}
+			}
+		}
+	},
+	"providesContext": {
+		"noble-performs/layout-block/previews": "previewBreakpoints"
+	},
 	"textdomain": "noble-layout-block",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",

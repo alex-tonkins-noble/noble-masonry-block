@@ -39,26 +39,29 @@
 		"breakpoints": {
 			"type": "object",
 			"default": {
-				"sm": {
+				"lg": {
 					"colValue": 12,
 					"rowValue": 1,
 					"enabled": false,
-					"breakpointWidth": 576,
-					"label": "Mobile"
+					"breakpointWidth": 992,
+					"label": "Desktop",
+					"previewEnabled": false
 				},
 				"md": {
 					"colValue": 12,
 					"rowValue": 1,
 					"enabled": false,
 					"breakpointWidth": 768,
-					"label": "Tablet"
+					"label": "Tablet",
+					"previewEnabled": false
 				},
-				"lg": {
+				"sm": {
 					"colValue": 12,
 					"rowValue": 1,
 					"enabled": false,
-					"breakpointWidth": 992,
-					"label": "Desktop"
+					"breakpointWidth": 576,
+					"label": "Mobile",
+					"previewEnabled": false
 				}
 			}
 		},
@@ -66,5 +69,8 @@
 			"type": "string",
 			"default": null
 		}
-	}
+	},
+	"usesContext": [
+		"noble-performs/layout-block/previews"
+	]
 }
