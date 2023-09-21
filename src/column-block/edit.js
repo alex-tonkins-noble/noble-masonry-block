@@ -32,6 +32,7 @@ export default function Edit(props) {
 		setAttributes({ breakpoints: { ...breakpoints, [key]: value } });
 	};
 
+	// Check if any preview breakpoint is active
 	const anyBreakpointIsActive = () => {
 		if (
 			previewBreakpoints &&
@@ -39,6 +40,17 @@ export default function Edit(props) {
 		) {
 			return true;
 		}
+	};
+
+	// Return the active breakpoint object
+	const activePreviewBreakpoint = () => {
+		for (const breakpoint in previewBreakpoints) {
+			if (previewBreakpoints[breakpoint].active === true) {
+				return previewBreakpoints[breakpoint];
+			}
+		}
+
+		return null;
 	};
 
 	// Function to generate the inline styles
@@ -57,9 +69,11 @@ export default function Edit(props) {
 			const breakpoint = breakpoints[key];
 
 			if (breakpoint.enabled) {
-				// Declare the Selector in which the grid columns and rows should be attached
-				// Also declare the grid columns and grid rows in their own variables, whilst adding "!important" to them if the respective breakpoint is in "preview mode"
-				// - Adding "!important" overrides every other breakpoints values.
+				/**
+				 * Declare the Selector in which the grid columns and rows should be attached
+				 * Also declare the grid columns and grid rows in their own variables, whilst adding "!important" to them if the respective breakpoint is in "preview mode"
+				 * - Adding "!important" overrides every other breakpoints values.
+				 */
 				const selector = `.wp-block-noble-performs-layout-block .block-editor-block-list__block:has(#${blockPropsId})`;
 				const gridColumn = `grid-column: span ${breakpoint.colValue}${
 					previewBreakpoints[key]?.active ? ' !important' : ''
@@ -68,9 +82,17 @@ export default function Edit(props) {
 					previewBreakpoints[key]?.active ? ' !important' : ''
 				}`;
 
-				// Push the inline styles for each active breakpoint.
-				// If we are in preview mode, then DO NOT wrap the styles in a media query because we want the admin to see them without resizing their browser.
-				if (anyBreakpointIsActive()) {
+				/**
+				 * Push the inline styles for each active breakpoint.
+				 * If we are in preview mode, then DO NOT wrap the styles in a media query because we want the admin to see them without resizing their browser.
+				 * Also check if the breakpoint being previewed is <= the breakpoints' attached to each column.
+				 * This is to ensure we aren't previewing Mobile styles on Desktop if Desktop isn't enabled on a specific column - as an example.
+				 */
+				if (
+					anyBreakpointIsActive() &&
+					previewBreakpoints[key].order <=
+						activePreviewBreakpoint().order
+				) {
 					styles.push(`${selector} { ${gridColumn}; ${gridRow}; }`);
 				} else {
 					styles.push(

@@ -11,8 +11,6 @@ export default function Edit(props) {
 	const { attributes, setAttributes } = props;
 	const { previewBreakpoints } = attributes;
 
-	// TO DO - Get the active breakpoint label and add it to the preview mode. "You are previewing "LABEL" view.".
-
 	// Function to handle the toggle of breakpoint active state
 	const toggleBreakpoint = (breakpoint) => {
 		const updatedBreakpoints = { ...previewBreakpoints };
@@ -30,6 +28,18 @@ export default function Edit(props) {
 
 		// Update the block attributes
 		setAttributes({ previewBreakpoints: updatedBreakpoints });
+	};
+
+	// TO DO - Get the active breakpoint label and add it to the preview mode. "You are previewing "LABEL" view.".
+	// Find the active Breakpoint's Label.
+	const getActiveBreakpointLabel = () => {
+		for (const breakpoint in previewBreakpoints) {
+			if (previewBreakpoints[breakpoint].active === true) {
+				return previewBreakpoints[breakpoint].label;
+			}
+		}
+		// If no active breakpoint is found, you can handle it accordingly, e.g., return a default label or null.
+		return null;
 	};
 
 	const anyBreakpointIsActive = () => {
@@ -50,7 +60,8 @@ export default function Edit(props) {
 			<div {...useBlockProps({ className: `${activePreviewModeClass}` })}>
 				{anyBreakpointIsActive() && (
 					<p className="preview-mode__text">
-						Preview Mode is Active.
+						Preview Mode is Active for:{' '}
+						<span>{getActiveBreakpointLabel()}</span>.
 					</p>
 				)}
 				<div className="wp-block-noble-performs-layout-block__inner">

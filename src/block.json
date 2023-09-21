@@ -24,15 +24,18 @@
 			"default": {
 				"lg": {
 					"active": false,
-					"label": "Desktop"
+					"label": "Desktop",
+					"order": 1
 				},
 				"md": {
 					"active": false,
-					"label": "Tablet"
+					"label": "Tablet",
+					"order": 2
 				},
 				"sm": {
 					"active": false,
-					"label": "Mobile"
+					"label": "Mobile",
+					"order": 3
 				}
 			}
 		}
