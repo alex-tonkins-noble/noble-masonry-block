@@ -58,10 +58,7 @@ export default function Edit(props) {
 		const styles = [];
 
 		styles.push(
-			`.wp-block-noble-performs-layout-block .block-editor-block-list__block:has(#${blockPropsId}) {
-				grid-column: span ${size.colValue};
-				grid-row: span ${size.rowValue};
-			}`
+			`.wp-block-noble-performs-layout-block .block-editor-block-list__block:has(#${blockPropsId}) { grid-column: span ${size.colValue}; grid-row: span ${size.rowValue}; }`
 		);
 
 		// Loop through each breakpoint

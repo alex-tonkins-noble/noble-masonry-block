@@ -13,10 +13,7 @@ export default function Save(props) {
 		const styles = [];
 
 		styles.push(
-			`#${blockId} {
-				grid-column: span ${size.colValue};
-				grid-row: span ${size.rowValue};
-			}`
+			`#${blockId} { grid-column: span ${size.colValue}; grid-row: span ${size.rowValue}; }`
 		);
 
 		// Loop through each breakpoint
@@ -26,12 +23,7 @@ export default function Save(props) {
 			if (breakpoint.enabled) {
 				// Generate the media query based on the breakpoint's min-width
 				styles.push(
-					`@media (max-width: ${breakpoint.breakpointWidth}px) {
-						#${blockId} {
-							grid-column: span ${breakpoint.colValue};
-							grid-row: span ${breakpoint.rowValue};
-						}
-					}`
+					`@media (max-width: ${breakpoint.breakpointWidth}px) { #${blockId} { grid-column: span ${breakpoint.colValue}; grid-row: span ${breakpoint.rowValue}; } }`
 				);
 			}
 		}
