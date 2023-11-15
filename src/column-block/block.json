@@ -1,13 +1,13 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "noble-performs/layout-block-column-block",
+	"name": "noble-performs/masonry-block-column-block",
 	"version": "1.0.0",
 	"title": "Column",
 	"category": "custom",
 	"icon": "columns",
-	"description": "Column block for use within the Noble Layout Block.",
-	"keywords": ["noble", "performs", "grid", "layout", "row", "column", "group"],
+	"description": "Column block for use within the Noble Masonry Block.",
+	"keywords": ["noble", "performs", "gallery", "masonry", "image"],
 	"supports": {
 		"reusable": false,
 		"html": false,
@@ -23,8 +23,8 @@
 		},
 		"align": true
 	},
-	"parent": ["noble-performs/layout-block"],
-	"textdomain": "layout-block-column-block",
+	"parent": ["noble-performs/masonry-block"],
+	"textdomain": "masonry-block-column-block",
 	"attributes": {
 		"blockId": {
 			"type": "string"
@@ -71,6 +71,6 @@
 		}
 	},
 	"usesContext": [
-		"noble-performs/layout-block/previews"
+		"noble-performs/masonry-block/previews"
 	]
 }

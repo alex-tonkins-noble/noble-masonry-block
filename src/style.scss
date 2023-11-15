@@ -1,12 +1,12 @@
-@use './styles/mixins/initiate-grid' as grid;
-@use './styles/mixins/column-block' as col;
+@use "./styles/mixins/initiate-grid" as grid;
+@use "./styles/mixins/column-block" as col;
 
-.wp-block-noble-performs-layout-block {
+.wp-block-noble-performs-masonry-block {
 	&__inner {
-        @include grid.initiate-grid();
-    }
+		@include grid.initiate-grid();
+	}
 }
 
-.wp-block-noble-performs-layout-block-column-block {
-    @include col.column-styles();
+.wp-block-noble-performs-masonry-block-column-block {
+	@include col.column-styles();
 }

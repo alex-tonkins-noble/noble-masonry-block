@@ -1,13 +1,13 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "noble-performs/layout-block",
+	"name": "noble-performs/masonry-block",
 	"version": "1.0.0",
-	"title": "Layout Block",
+	"title": "Masonry Block",
 	"category": "custom",
 	"icon": "layout",
-	"description": "A block used to create top-notch layouts.",
-	"keywords": ["noble", "performs", "grid", "layout", "row", "column", "group"],
+	"description": "A block used to create top-notch masonry galleries.",
+	"keywords": ["noble", "performs", "gallery", "masonry", "image"],
 	"supports": {
 		"html": false,
 		"color": {
@@ -41,9 +41,9 @@
 		}
 	},
 	"providesContext": {
-		"noble-performs/layout-block/previews": "previewBreakpoints"
+		"noble-performs/masonry-block/previews": "previewBreakpoints"
 	},
-	"textdomain": "noble-layout-block",
+	"textdomain": "noble-masonry-block",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css"

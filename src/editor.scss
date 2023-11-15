@@ -1,118 +1,117 @@
-@use './styles/mixins/initiate-grid' as grid;
-@use './styles/mixins/column-block' as col;
+@use "./styles/mixins/initiate-grid" as grid;
+@use "./styles/mixins/column-block" as col;
 
 $preview-mode-colour: #84dbf7;
 
-.wp-block-noble-performs-layout-block {
-    &__inner {
-        // Unset grid layout on wrong element on backend;
-        display: block;
-        
-        
-        > .block-editor-inner-blocks {
-            > .block-editor-block-list__layout {
-                @include grid.initiate-grid();
-    
-                > .block-editor-block-list__block {
-                    box-shadow: 0 0 10px 5px #00000025;
-                    
-                    > .block-editor-block-list__block {
-                        height: 100%;
-                        @include col.column-styles();
-                    }
-                }
-    
-                // Style the "new block appender" to be easier to click and use.
-                > .block-list-appender {
-                    
-                }
-            }
-        }
-    }
+.wp-block-noble-performs-masonry-block {
+	&__inner {
+		// Unset grid layout on wrong element on backend;
+		display: block;
+
+		> .block-editor-inner-blocks {
+			> .block-editor-block-list__layout {
+				@include grid.initiate-grid();
+
+				> .block-editor-block-list__block {
+					box-shadow: 0 0 10px 5px #00000025;
+
+					> .block-editor-block-list__block {
+						height: 100%;
+						@include col.column-styles();
+					}
+				}
+
+				// Style the "new block appender" to be easier to click and use.
+				> .block-list-appender {
+				}
+			}
+		}
+	}
 }
 
 // Style some info text so it's easier for the admin to see.
 .info-tagline {
-    color: #888888;
-    font-style: italic;
+	color: #888888;
+	font-style: italic;
 }
 
 // Style the Range Control area to better the admin UX
 .better-range-styling-wrapper {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 10px;
-    margin-bottom: 24px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	gap: 10px;
+	margin-bottom: 24px;
 
-    .components-range-control {
-        flex-grow: 1;
-        flex-shrink: 0;
-        margin-bottom: 0;
+	.components-range-control {
+		flex-grow: 1;
+		flex-shrink: 0;
+		margin-bottom: 0;
 
-        .components-base-control__field {
-            &, .components-base-control {
-                margin-bottom: 0;
-            }
-        }
-    }
+		.components-base-control__field {
+			&,
+			.components-base-control {
+				margin-bottom: 0;
+			}
+		}
+	}
 
-    > span {
-        flex: 0 0 50px;
-        height: 50px;
-        text-align: center;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        padding: 5px;
-        align-self: flex-end;
-        background: #e0e4ff;
-        border: 1px solid #b1bbff;
-    }
+	> span {
+		flex: 0 0 50px;
+		height: 50px;
+		text-align: center;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		padding: 5px;
+		align-self: flex-end;
+		background: #e0e4ff;
+		border: 1px solid #b1bbff;
+	}
 }
 
 // Style the Toolbar Dropdown Menu active items - put in place for the preview functionality.
 .popover-slot {
-    .components-popover {
-        .components-popover__content {
-            .components-dropdown-menu__menu {
-                .components-button {
-                    &.is-active {
-                        background-color: #007cba;
-                        color: white;
-                    }
-                }
-            }
-        }
-    }
+	.components-popover {
+		.components-popover__content {
+			.components-dropdown-menu__menu {
+				.components-button {
+					&.is-active {
+						background-color: #007cba;
+						color: white;
+					}
+				}
+			}
+		}
+	}
 }
 
 // Add some styles for when the admin is previewing a breakpoint.
 .preview-mode {
-    background: $preview-mode-colour;
-    box-shadow: 0 0 10px 0 $preview-mode-colour;
-    animation: glow 4s linear infinite;
-    padding: 15px;
-    border-radius: 10px;
+	background: $preview-mode-colour;
+	box-shadow: 0 0 10px 0 $preview-mode-colour;
+	animation: glow 4s linear infinite;
+	padding: 15px;
+	border-radius: 10px;
 
-    &__text {
-        border-radius: 10px;
-        margin: 0 0 30px;
-        text-align: center;
-        
-        span {
-            font-weight: bold;
-        }
-    }
+	&__text {
+		border-radius: 10px;
+		margin: 0 0 30px;
+		text-align: center;
+
+		span {
+			font-weight: bold;
+		}
+	}
 }
 
 @keyframes glow {
-    0% {
-        box-shadow: 0 0 10px 0 $preview-mode-colour;
-    }
-    
-    50% {
-        box-shadow: 0 0 60px 0 $preview-mode-colour;
-    }
+	0% {
+		box-shadow: 0 0 10px 0 $preview-mode-colour;
+	}
+
+	50% {
+		box-shadow: 0 0 60px 0 $preview-mode-colour;
+	}
 }

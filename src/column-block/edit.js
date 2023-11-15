@@ -13,7 +13,7 @@ export default function Edit(props) {
 	const { attributes, setAttributes, context } = props;
 	const { size, breakpoints, verticalAlignment } = attributes; // Define a single "breakpoints" object
 
-	const previewBreakpoints = context['noble-performs/layout-block/previews'];
+	const previewBreakpoints = context['noble-performs/masonry-block/previews'];
 
 	const vAlignmentClass = verticalAlignment
 		? `is-vertically-aligned-${verticalAlignment}`
@@ -58,7 +58,7 @@ export default function Edit(props) {
 		const styles = [];
 
 		styles.push(
-			`.wp-block-noble-performs-layout-block .block-editor-block-list__block:has(#${blockPropsId}) { grid-column: span ${size.colValue}; grid-row: span ${size.rowValue}; }`
+			`.wp-block-noble-performs-masonry-block .block-editor-block-list__block:has(#${blockPropsId}) { grid-column: span ${size.colValue}; grid-row: span ${size.rowValue}; }`
 		);
 
 		// Loop through each breakpoint
@@ -71,7 +71,7 @@ export default function Edit(props) {
 				 * Also declare the grid columns and grid rows in their own variables, whilst adding "!important" to them if the respective breakpoint is in "preview mode"
 				 * - Adding "!important" overrides every other breakpoints values.
 				 */
-				const selector = `.wp-block-noble-performs-layout-block .block-editor-block-list__block:has(#${blockPropsId})`;
+				const selector = `.wp-block-noble-performs-masonry-block .block-editor-block-list__block:has(#${blockPropsId})`;
 				const gridColumn = `grid-column: span ${breakpoint.colValue}${
 					previewBreakpoints[key]?.active ? ' !important' : ''
 				}`;
@@ -122,17 +122,17 @@ export default function Edit(props) {
 
 			<InspectorControls>
 				<PanelBody
-					title={__('Column Size', 'layout-block-column-block')}
+					title={__('Column Size', 'masonry-block-column-block')}
 				>
 					<p className="info-tagline">
 						{__(
 							'Specify the default width and height of your column.',
-							'layout-block-column-block'
+							'masonry-block-column-block'
 						)}
 					</p>
 					<div className="better-range-styling-wrapper">
 						<RangeControl
-							label={__('Width', 'layout-block-column-block')}
+							label={__('Width', 'masonry-block-column-block')}
 							value={size.colValue}
 							onChange={(newValue) =>
 								setAttributes({
@@ -146,7 +146,7 @@ export default function Edit(props) {
 					</div>
 					{/* Set the Row Span */}
 					<RangeControl
-						label={__('Height', 'layout-block-column-block')}
+						label={__('Height', 'masonry-block-column-block')}
 						value={size.rowValue}
 						onChange={(newValue) =>
 							setAttributes({
@@ -160,13 +160,13 @@ export default function Edit(props) {
 				<PanelBody
 					title={__(
 						'Column Breakpoints',
-						'layout-block-column-block'
+						'masonry-block-column-block'
 					)}
 				>
 					<p className="info-tagline">
 						{__(
 							'Change the width and height of your columns on Mobile, Tablet and Desktop here - not mandatory, but highly advised.',
-							'layout-block-column-block'
+							'masonry-block-column-block'
 						)}
 					</p>
 					{/* Loop through each breakpoint */}
@@ -193,7 +193,7 @@ export default function Edit(props) {
 											<RangeControl
 												label={__(
 													'Width',
-													'layout-block-column-block'
+													'masonry-block-column-block'
 												)}
 												value={breakpoint.colValue}
 												onChange={(newValue) =>
@@ -214,7 +214,7 @@ export default function Edit(props) {
 										<RangeControl
 											label={__(
 												'Height',
-												'layout-block-column-block'
+												'masonry-block-column-block'
 											)}
 											value={breakpoint.rowValue}
 											onChange={(newValue) =>
@@ -242,7 +242,7 @@ export default function Edit(props) {
 				{/* Output the inline styles */}
 				{inlineStyles && <style>{inlineStyles}</style>}
 
-				<div className="layout-block-column-block__inner">
+				<div className="masonry-block-column-block__inner">
 					<InnerBlocks orientation="vertical" />
 				</div>
 			</div>

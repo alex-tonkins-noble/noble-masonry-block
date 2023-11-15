@@ -64,10 +64,10 @@ export default function Edit(props) {
 						<span>{getActiveBreakpointLabel()}</span>.
 					</p>
 				)}
-				<div className="wp-block-noble-performs-layout-block__inner">
+				<div className="wp-block-noble-performs-masonry-block__inner">
 					<InnerBlocks
 						allowedBlocks={[
-							'noble-performs/layout-block-column-block',
+							'noble-performs/masonry-block-column-block',
 						]}
 						orientation="horizontal"
 					/>

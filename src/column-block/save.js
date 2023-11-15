@@ -41,7 +41,7 @@ export default function Save(props) {
 			{/* Output the inline styles */}
 			{inlineStyles && <style>{inlineStyles}</style>}
 
-			<div className="layout-block-column-block__inner">
+			<div className="masonry-block-column-block__inner">
 				<InnerBlocks.Content />
 			</div>
 		</div>
