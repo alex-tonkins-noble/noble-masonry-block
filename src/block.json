@@ -18,31 +18,6 @@
 			"link": true
 		}
 	},
-	"attributes": {
-		"previewBreakpoints": {
-			"type": "object",
-			"default": {
-				"lg": {
-					"active": false,
-					"label": "Desktop",
-					"order": 1
-				},
-				"md": {
-					"active": false,
-					"label": "Tablet",
-					"order": 2
-				},
-				"sm": {
-					"active": false,
-					"label": "Mobile",
-					"order": 3
-				}
-			}
-		}
-	},
-	"providesContext": {
-		"noble-performs/masonry-block/previews": "previewBreakpoints"
-	},
 	"textdomain": "noble-masonry-block",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",

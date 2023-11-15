@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       Noble Masonry Block
- * Description:       A block used to create top-notch masonry galleries.
+ * Description:       A block used to create spectacular masonry galleries.
  * Requires at least: 6.1
  * Requires PHP:      7.0
  * Version:           1.0.0

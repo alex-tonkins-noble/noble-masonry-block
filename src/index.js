@@ -1,5 +1,5 @@
 import './style.scss';
-import './column-block';
+import './section-block';
 import { registerBlockType } from '@wordpress/blocks';
 import Edit from './edit';
 import save from './save';

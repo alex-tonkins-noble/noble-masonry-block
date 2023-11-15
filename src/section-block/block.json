@@ -1,0 +1,46 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "noble-performs/masonry-block-section-block",
+	"version": "1.0.0",
+	"title": "Section",
+	"category": "custom",
+	"icon": "columns",
+	"description": "Section block for use within the Noble Masonry Block.",
+	"keywords": ["noble", "performs", "gallery", "masonry", "image", "section"],
+	"supports": {
+		"reusable": false,
+		"html": false,
+		"color": {
+			"background": true,
+			"text": true,
+			"enableContrastChecker": true,
+			"gradients": true,
+			"link": true
+		},
+		"layout": {
+			"allowVerticalAlignment": true
+		},
+		"align": true
+	},
+	"parent": ["noble-performs/masonry-block"],
+	"textdomain": "masonry-block-section-block",
+	"attributes": {
+		"blockId": {
+			"type": "string"
+		},
+		"size": {
+			"type": "object",
+			"default": {
+				"colValue": 12
+			}
+		},
+		"verticalAlignment" : {
+			"type": "string",
+			"default": null
+		}
+	},
+	"usesContext": [
+		"noble-performs/masonry-block/previews"
+	]
+}
