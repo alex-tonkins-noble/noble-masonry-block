@@ -19,10 +19,12 @@ import {
 import { useEffect, useState } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import { isBlobURL, revokeBlobURL } from '@wordpress/blob';
+// import convertAspectRatioToPercentage from '../functions/convertAspectRatioToPercentage';
 
 function Edit(props) {
 	const { attributes, setAttributes, noticeOperations, noticeUI } = props;
-	const { size, imageUrl, imageAlt, imageID } = attributes;
+	const { size, imageUrl, imageAlt, imageID, aRatio } = attributes;
+	const maxAspectRatioSize = 100;
 
 	const [blobURL, setBlobURL] = useState();
 
@@ -134,9 +136,11 @@ function Edit(props) {
 	const generateInlineStyles = () => {
 		const styles = [];
 
+		const colStyle = `grid-column: span ${size.colValue}`;
+
 		// Very different markup to the save function due to how WordPress generates the markup of the backend.
 		styles.push(
-			`.wp-block-noble-performs-masonry-block .block-editor-block-list__block:has(> .${blockPropsId}) { grid-column: span ${size.colValue}; }`
+			`.wp-block-noble-performs-masonry-block .block-editor-block-list__block:has(> .${blockPropsId}) { ${colStyle}; }`
 		);
 
 		return styles.join('\n');
@@ -148,6 +152,10 @@ function Edit(props) {
 
 	// Generate the inline styles
 	const inlineStyles = generateInlineStyles();
+
+	function clamp(value, min, max) {
+		return Math.min(Math.max(value, min), max);
+	}
 
 	return (
 		<>
@@ -205,6 +213,7 @@ function Edit(props) {
 							'masonry-block-section-block'
 						)}
 					</p>
+
 					<div className="better-range-styling-wrapper">
 						<RangeControl
 							label={__('Width', 'masonry-block-section-block')}
@@ -218,6 +227,51 @@ function Edit(props) {
 							max={12}
 						/>
 						{generateBetterRangeUXSpan(size.colValue)}
+					</div>
+
+					<div className="aspect-ratio-wrapper">
+						<input
+							id="numeratorInput"
+							type="number"
+							value={aRatio.numerator}
+							onChange={(event) => {
+								const clampedValue = clamp(
+									parseInt(event.target.value, 10),
+									1,
+									maxAspectRatioSize
+								);
+								setAttributes({
+									aRatio: {
+										...aRatio,
+										numerator: clampedValue,
+									},
+								});
+							}}
+							min={1}
+							max={maxAspectRatioSize}
+						/>
+						<span className="separator">:</span>
+						<input
+							id="denominatorInput"
+							type="number"
+							value={aRatio.denominator}
+							onChange={(event) => {
+								const clampedValue = clamp(
+									parseInt(event.target.value, 10),
+									1,
+									maxAspectRatioSize
+								);
+
+								setAttributes({
+									aRatio: {
+										...aRatio,
+										denominator: clampedValue,
+									},
+								});
+							}}
+							min={1}
+							max={maxAspectRatioSize}
+						/>
 					</div>
 				</PanelBody>
 			</InspectorControls>

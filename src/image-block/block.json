@@ -39,6 +39,13 @@
 			"default": {
 				"colValue": 12
 			}
+		},
+		"aRatio": {
+			"type": "object",
+			"default": {
+				"numerator": 1,
+				"denominator": 1
+			}
 		}
 	}
 }

@@ -1,5 +1,9 @@
 @use "./styles/mixins/initiate-grid" as grid;
 
+$better_range_width: 60px;
+$better_range_height: 50px;
+$better_range_gap: 10px;
+
 .wp-block-noble-performs-masonry-block__inner {
 	// Unset grid layout on wrong element on backend;
 	display: block;
@@ -30,8 +34,28 @@
 		
 			img {
 				display: block;
+				width: 100%;
 			}
 		}
+	}
+}
+
+.aspect-ratio-wrapper {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 5px;
+
+	input {
+		flex: 0 0 60px;
+		max-width: 60px;
+		padding-right: 0;
+	}
+
+	.separator {
+		flex: 0 0 10px;
+		text-align: center;
+		font-weight: bold;
 	}
 }
 
@@ -47,13 +71,14 @@
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
-	gap: 10px;
+	gap: $better_range_gap;
 	margin-bottom: 24px;
 
 	.components-range-control {
 		flex-grow: 1;
 		flex-shrink: 0;
 		margin-bottom: 0;
+		max-width: calc(100% - ($better_range_width + $better_range_gap));
 
 		.components-base-control__field {
 			&,
@@ -64,15 +89,16 @@
 	}
 
 	> span {
-		flex: 0 0 50px;
-		height: 50px;
+		flex: 0 0 $better_range_width;
+		max-width: $better_range_width;
+		height: $better_range_height;
 		text-align: center;
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
 		padding: 5px;
-		align-self: flex-end;
+		align-self: flex-start;
 		background: #e0e4ff;
 		border: 1px solid #b1bbff;
 	}
