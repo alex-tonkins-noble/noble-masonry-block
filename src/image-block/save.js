@@ -2,7 +2,7 @@ import { useBlockProps } from '@wordpress/block-editor';
 
 export default function Save(props) {
 	const { attributes } = props;
-	const { blockId, size } = attributes;
+	const { blockId, size, imageUrl, imageAlt, imageID } = attributes;
 
 	// Generate the inline styles
 	const generateInlineStyles = () => {
@@ -20,7 +20,13 @@ export default function Save(props) {
 			{/* Output the inline styles */}
 			{inlineStyles && <style>{inlineStyles}</style>}
 
-			<div className="masonry-block-image-block__inner"></div>
+			{imageUrl && (
+				<img
+					src={imageUrl}
+					alt={imageAlt}
+					className={imageID && `wp-image-${imageID}`}
+				/>
+			)}
 		</div>
 	);
 }

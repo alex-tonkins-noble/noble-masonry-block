@@ -27,9 +27,9 @@ export default function Save(props) {
 			{/* Output the inline styles */}
 			{inlineStyles && <style>{inlineStyles}</style>}
 
-			<div className="masonry-block-section-block__inner">
-				<InnerBlocks.Content />
-			</div>
+			{/* <div className="section_inner"> */}
+			<InnerBlocks.Content />
+			{/* </div> */}
 		</div>
 	);
 }

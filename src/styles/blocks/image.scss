@@ -1,0 +1,24 @@
+.wp-block-noble-performs-masonry-block-image-block {
+    grid-column: span 12;
+
+    overflow: hidden;
+    position: relative;
+
+    // Placeholder until implemented in block.
+    padding-bottom: 100%;
+
+    img {
+        display: block;
+        
+        z-index: 1;
+        object-fit: cover;
+        max-width: 100%;
+        width: auto;
+        min-height: 100%;
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}

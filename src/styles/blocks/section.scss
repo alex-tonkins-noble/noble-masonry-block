@@ -1,0 +1,5 @@
+@use "../mixins/initiate-grid" as grid;
+
+.wp-block-noble-performs-masonry-block-section-block {
+	@include grid.initiate-grid();
+}

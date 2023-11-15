@@ -1,12 +1,9 @@
 @use "./styles/mixins/initiate-grid" as grid;
-@use "./styles/mixins/section-block" as col;
 
-.wp-block-noble-performs-masonry-block {
-	&__inner {
-		@include grid.initiate-grid();
-	}
+@use "./styles/blocks/section";
+@use "./styles/blocks/image";
+
+.wp-block-noble-performs-masonry-block__inner {
+	@include grid.initiate-grid();
 }
 
-.wp-block-noble-performs-masonry-block-section-block {
-	@include col.column-styles();
-}

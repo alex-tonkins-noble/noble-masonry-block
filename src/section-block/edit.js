@@ -13,10 +13,6 @@ export default function Edit(props) {
 	const { attributes, setAttributes } = props;
 	const { size, verticalAlignment } = attributes;
 
-	const vAlignmentClass = verticalAlignment
-		? `is-vertically-aligned-${verticalAlignment}`
-		: null;
-
 	// Define a separate blockId for the backend to target elements for backend styling.
 	const blockPropsId = useBlockProps().id;
 
@@ -29,8 +25,9 @@ export default function Edit(props) {
 	const generateInlineStyles = () => {
 		const styles = [];
 
+		// Very different markup to the save function due to how WordPress generates the markup of the backend.
 		styles.push(
-			`.wp-block-noble-performs-masonry-block .block-editor-block-list__block:has(#${blockPropsId}) { grid-column: span ${size.colValue}; }`
+			`.wp-block-noble-performs-masonry-block .block-editor-block-list__block:has(> .${blockPropsId}) { grid-column: span ${size.colValue}; }`
 		);
 
 		return styles.join('\n');
@@ -81,23 +78,18 @@ export default function Edit(props) {
 				</PanelBody>
 			</InspectorControls>
 
-			<div
-				{...useBlockProps({
-					className: `${vAlignmentClass}`,
-				})}
-			>
+			{/* Adding the blockPropsId as a classname in order to target it and render the grid in the backend. Frontend markup is much easier to manage. */}
+			<div {...useBlockProps({ className: blockPropsId })}>
 				{/* Output the inline styles */}
 				{inlineStyles && <style>{inlineStyles}</style>}
 
-				<div className="masonry-block-section-block__inner">
-					<InnerBlocks
-						orientation="vertical"
-						allowedBlocks={[
-							'noble-performs/masonry-block-section-block',
-							'noble-performs/masonry-block-image-block',
-						]}
-					/>
-				</div>
+				<InnerBlocks
+					orientation="vertical"
+					allowedBlocks={[
+						'noble-performs/masonry-block-section-block',
+						'noble-performs/masonry-block-image-block',
+					]}
+				/>
 			</div>
 		</>
 	);
