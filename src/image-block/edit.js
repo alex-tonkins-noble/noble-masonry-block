@@ -1,21 +1,11 @@
 import { __ } from '@wordpress/i18n';
-import {
-	useBlockProps,
-	InspectorControls,
-	InnerBlocks,
-	BlockControls,
-	BlockVerticalAlignmentToolbar,
-} from '@wordpress/block-editor';
+import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import { RangeControl, PanelBody } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
 
 export default function Edit(props) {
 	const { attributes, setAttributes } = props;
-	const { size, verticalAlignment } = attributes;
-
-	const vAlignmentClass = verticalAlignment
-		? `is-vertically-aligned-${verticalAlignment}`
-		: null;
+	const { size, imageUrl, imageAlt, imageID } = attributes;
 
 	// Define a separate blockId for the backend to target elements for backend styling.
 	const blockPropsId = useBlockProps().id;
@@ -45,15 +35,6 @@ export default function Edit(props) {
 
 	return (
 		<>
-			<BlockControls>
-				<BlockVerticalAlignmentToolbar
-					value={verticalAlignment}
-					onChange={(value) => {
-						setAttributes({ verticalAlignment: value });
-					}}
-				/>
-			</BlockControls>
-
 			<InspectorControls>
 				<PanelBody
 					title={__('Section Size', 'masonry-block-section-block')}
@@ -81,23 +62,11 @@ export default function Edit(props) {
 				</PanelBody>
 			</InspectorControls>
 
-			<div
-				{...useBlockProps({
-					className: `${vAlignmentClass}`,
-				})}
-			>
+			<div {...useBlockProps()}>
 				{/* Output the inline styles */}
 				{inlineStyles && <style>{inlineStyles}</style>}
 
-				<div className="masonry-block-section-block__inner">
-					<InnerBlocks
-						orientation="vertical"
-						allowedBlocks={[
-							'noble-performs/masonry-block-section-block',
-							'noble-performs/masonry-block-image-block',
-						]}
-					/>
-				</div>
+				<div className="image_wrapper"></div>
 			</div>
 		</>
 	);

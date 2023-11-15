@@ -1,0 +1,44 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "noble-performs/masonry-block-image-block",
+	"version": "1.0.0",
+	"title": "Image",
+	"category": "custom",
+	"icon": "format-image",
+	"description": "Image block for use within the Noble Masonry Block.",
+	"keywords": ["noble", "performs", "gallery", "masonry", "image", "section"],
+	"supports": {
+		"reusable": false,
+		"html": false
+	},
+	"parent": ["noble-performs/masonry-block-section-block"],
+	"textdomain": "masonry-block-image-block",
+	"attributes": {
+		"imageUrl": {
+			"type": "string",
+			"source": "attribute",
+			"selector": "img",
+			"attribute": "src"
+		},
+		"imageAlt": {
+			"type": "string",
+			"source": "attribute",
+			"attribute": "alt",
+			"selector": "img",
+			"default": ""
+		},
+		"imageID": {
+			"type": "number"
+		},
+		"blockId": {
+			"type": "string"
+		},
+		"size": {
+			"type": "object",
+			"default": {
+				"colValue": 12
+			}
+		}
+	}
+}

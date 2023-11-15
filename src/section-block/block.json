@@ -39,8 +39,5 @@
 			"type": "string",
 			"default": null
 		}
-	},
-	"usesContext": [
-		"noble-performs/masonry-block/previews"
-	]
+	}
 }
