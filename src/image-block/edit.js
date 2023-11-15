@@ -19,7 +19,7 @@ import {
 import { useEffect, useState } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import { isBlobURL, revokeBlobURL } from '@wordpress/blob';
-// import convertAspectRatioToPercentage from '../functions/convertAspectRatioToPercentage';
+import convertAspectRatioToPercentage from '../functions/convertAspectRatioToPercentage';
 
 function Edit(props) {
 	const { attributes, setAttributes, noticeOperations, noticeUI } = props;
@@ -137,10 +137,16 @@ function Edit(props) {
 		const styles = [];
 
 		const colStyle = `grid-column: span ${size.colValue}`;
+		const paddingStyle = `padding-bottom: ${convertAspectRatioToPercentage(
+			aRatio.numerator,
+			aRatio.denominator
+		)}`;
+
+		// .wp-block-noble-performs-masonry-block .block-editor-block-list__block:has(> .block-23625c49-60b8-4e3c-abc5-3c5f1c3b496e)
 
 		// Very different markup to the save function due to how WordPress generates the markup of the backend.
 		styles.push(
-			`.wp-block-noble-performs-masonry-block .block-editor-block-list__block:has(> .${blockPropsId}) { ${colStyle}; }`
+			`.wp-block-noble-performs-masonry-block .block-editor-block-list__block:has(> .${blockPropsId}) { ${colStyle}; ${paddingStyle}; } `
 		);
 
 		return styles.join('\n');
@@ -272,6 +278,13 @@ function Edit(props) {
 							min={1}
 							max={maxAspectRatioSize}
 						/>
+
+						<span>
+							{convertAspectRatioToPercentage(
+								aRatio.numerator,
+								aRatio.denominator
+							)}
+						</span>
 					</div>
 				</PanelBody>
 			</InspectorControls>
