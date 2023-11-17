@@ -1,16 +1,13 @@
 .wp-block-noble-performs-masonry-block-image-block {
     grid-column: span 12;
-
     overflow: hidden;
     position: relative;
 
     img {
-        display: block;
-        width: 100%;
-        
         z-index: 1;
         object-fit: cover;
         max-width: 100%;
+        width: 100%;
         min-height: 100%;
         display: block;
         position: absolute;

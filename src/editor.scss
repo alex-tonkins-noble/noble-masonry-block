@@ -4,90 +4,22 @@ $better_range_width: 60px;
 $better_range_height: 50px;
 $better_range_gap: 10px;
 
-.wp-block-noble-performs-masonry-block__inner {
-	// Unset grid layout on wrong element on backend;
-	display: block;
-
-	> .block-editor-inner-blocks {
-		.block-editor-inner-blocks,
-		.block-editor-block-list__block,
-		.block-editor-block-list__layout {
-			.wp-block {
-				// height: 100%;
-			}
-		}
-	}
-}
-
-// Initiate the grid on the correct section and image block wrappers.
-.block-editor-block-list__layout {
-	&:has(> [data-type="noble-performs/masonry-block-section-block"]),
-	&:has(> [data-type="noble-performs/masonry-block-image-block"]) {
-		@include grid.initiate-grid();
-	}
-}
-
-// Section blocks
-
-// Here we are basically saying: "Look for the parent element that has the child element with the data attribute which also has a child element of the same data attribute".
-// This is because we want to target the parent element, but have no way of doing so because they have identical attributes.
-:has(> [data-type="noble-performs/masonry-block-section-block"]) {
-
-	// Theoretically, the element below is one element above where the structure begins on the frontend.
-	// Any styles below will be replicated in the styles.scss sheet in some way.
-	> :has(> [data-type="noble-performs/masonry-block-section-block"]) {
-		height: 100%;
-		margin: 0;
-
-		// Ensure that all of the relevant elements have height 100% set to respect our grid setup.
-		> .wp-block {
-			height: 100%;
-			
-			> .block-editor-inner-blocks {
-				height: 100%;
-
-				> .block-editor-block-list__layout {
-					height: 100%;
+.wp-block-noble-performs-masonry-block {
+	// As we are controlling the inner block props, we need to ensure the toggle is actually visible when it needs to be.
+	&.is-selected {
+		> * {
+			> .block-list-appender {
+				button {
+					display: flex !important;
 				}
 			}
 		}
 	}
 }
 
-// Image blocks
-
-// Here we are basically saying: "Look for the parent element that has the child element with the data attribute which also has a child element of the same data attribute".
-// This is because we want to target the parent element, but have no way of doing so because they have identical attributes.
-:has(> [data-type="noble-performs/masonry-block-image-block"]) {
-	> :has(> [data-type="noble-performs/masonry-block-image-block"]) {
-		grid-column: span 12;
-		margin: 0;
-		overflow: hidden;
-		position: relative;
-
-		> .wp-block {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-		
-			img {
-				display: block;
-				width: 100%;
-
-				z-index: 1;
-				object-fit: cover;
-				max-width: 100%;
-				min-height: 100%;
-				display: block;
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%);
-			}
-		}
-	}
+.wp-block-noble-performs-masonry-block-section-block,
+.wp-block-noble-performs-masonry-block-image-block {
+	margin: 0 !important;
 }
 
 .aspect-ratio-wrapper {
@@ -108,7 +40,6 @@ $better_range_gap: 10px;
 		font-weight: bold;
 	}
 }
-
 
 // Style some info text so it's easier for the admin to see.
 .info-tagline {

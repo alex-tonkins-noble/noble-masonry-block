@@ -142,12 +142,8 @@ function Edit(props) {
 			aRatio.denominator
 		)}`;
 
-		// .wp-block-noble-performs-masonry-block .block-editor-block-list__block:has(> .block-23625c49-60b8-4e3c-abc5-3c5f1c3b496e)
-
 		// Very different markup to the save function due to how WordPress generates the markup of the backend.
-		styles.push(
-			`.wp-block-noble-performs-masonry-block .block-editor-block-list__block:has(> .${blockPropsId}) { ${colStyle}; ${paddingStyle}; } `
-		);
+		styles.push(`#${blockPropsId} { ${colStyle}; ${paddingStyle}; } `);
 
 		return styles.join('\n');
 	};
@@ -162,6 +158,10 @@ function Edit(props) {
 	function clamp(value, min, max) {
 		return Math.min(Math.max(value, min), max);
 	}
+
+	const additionalWrapperProps = {
+		className: `wp-block-noble-performs-masonry-block-image-block`,
+	};
 
 	return (
 		<>
@@ -234,7 +234,6 @@ function Edit(props) {
 						/>
 						{generateBetterRangeUXSpan(size.colValue)}
 					</div>
-
 					<div className="aspect-ratio-wrapper">
 						<input
 							id="numeratorInput"
@@ -290,7 +289,7 @@ function Edit(props) {
 			</InspectorControls>
 
 			{/* Adding the blockPropsId as a classname in order to target it and render the grid in the backend. Frontend markup is much easier to manage. */}
-			<div {...useBlockProps({ className: blockPropsId })}>
+			<div {...useBlockProps(additionalWrapperProps)}>
 				{/* Output the inline styles */}
 				{inlineStyles && <style>{inlineStyles}</style>}
 

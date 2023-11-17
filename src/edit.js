@@ -1,19 +1,32 @@
 import './editor.scss';
-import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
+import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 
 export default function Edit() {
+	const additionalWrapperProps = {
+		className: 'class_number_1',
+	};
+
+	const innerBlocksPropsNew = {
+		allowedBlocks: [
+			'noble-performs/masonry-block',
+			'noble-performs/masonry-block-section-block',
+			'core/paragraph',
+		],
+		orientation: 'horizontal',
+	};
+
+	const blockProps = useBlockProps(additionalWrapperProps);
+
+	const { children, ...innerBlocksProps } = useInnerBlocksProps(
+		blockProps,
+		innerBlocksPropsNew
+	);
+
 	return (
-		<>
-			<div {...useBlockProps()}>
-				<div className="wp-block-noble-performs-masonry-block__inner">
-					<InnerBlocks
-						allowedBlocks={[
-							'noble-performs/masonry-block-section-block',
-						]}
-						orientation="horizontal"
-					/>
-				</div>
+		<section {...innerBlocksProps}>
+			<div className="wp-block-noble-performs-masonry-block__inner">
+				{children}
 			</div>
-		</>
+		</section>
 	);
 }

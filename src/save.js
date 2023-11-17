@@ -1,11 +1,19 @@
-import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 
-export default function save() {
+export default function BlockSave() {
+	const additionalWrapperProps = {
+		className: 'class_number_1',
+	};
+
+	const blockProps = useBlockProps.save(additionalWrapperProps);
+	const { children, ...innerBlocksProps } =
+		useInnerBlocksProps.save(blockProps);
+
 	return (
-		<div {...useBlockProps.save()}>
+		<section {...innerBlocksProps}>
 			<div className="wp-block-noble-performs-masonry-block__inner">
-				<InnerBlocks.Content />
+				{children}
 			</div>
-		</div>
+		</section>
 	);
 }

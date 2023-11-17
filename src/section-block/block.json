@@ -38,6 +38,10 @@
 		"verticalAlignment" : {
 			"type": "string",
 			"default": null
+		},
+		"keepLayoutOnMobile": {
+			"type": "boolean",
+			"default": true
 		}
 	}
 }

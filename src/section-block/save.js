@@ -1,4 +1,4 @@
-import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 
 export default function Save(props) {
 	const { attributes } = props;
@@ -6,7 +6,7 @@ export default function Save(props) {
 
 	const vAlignmentClass = verticalAlignment
 		? `is-vertically-aligned-${verticalAlignment}`
-		: null;
+		: '';
 
 	// Generate the inline styles
 	const generateInlineStyles = () => {
@@ -19,17 +19,18 @@ export default function Save(props) {
 
 	const inlineStyles = generateInlineStyles();
 
-	return (
-		<div
-			id={blockId}
-			{...useBlockProps.save({ className: vAlignmentClass })}
-		>
-			{/* Output the inline styles */}
-			{inlineStyles && <style>{inlineStyles}</style>}
+	const additionalWrapperProps = {
+		className: `class_number_2 ${vAlignmentClass}`,
+	};
 
-			{/* <div className="section_inner"> */}
-			<InnerBlocks.Content />
-			{/* </div> */}
+	const blockProps = useBlockProps.save(additionalWrapperProps);
+	const { children, ...innerBlocksProps } =
+		useInnerBlocksProps.save(blockProps);
+
+	return (
+		<div id={blockId} {...innerBlocksProps}>
+			{inlineStyles && <style>{inlineStyles}</style>}
+			{children}
 		</div>
 	);
 }

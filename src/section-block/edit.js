@@ -2,9 +2,9 @@ import { __ } from '@wordpress/i18n';
 import {
 	useBlockProps,
 	InspectorControls,
-	InnerBlocks,
 	BlockControls,
 	BlockVerticalAlignmentToolbar,
+	useInnerBlocksProps,
 } from '@wordpress/block-editor';
 import { RangeControl, PanelBody } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
@@ -26,9 +26,7 @@ export default function Edit(props) {
 		const styles = [];
 
 		// Very different markup to the save function due to how WordPress generates the markup of the backend.
-		styles.push(
-			`.wp-block-noble-performs-masonry-block .block-editor-block-list__block:has(> .${blockPropsId}) { grid-column: span ${size.colValue}; }`
-		);
+		styles.push(`#${blockPropsId} { grid-column: span ${size.colValue}; }`);
 
 		return styles.join('\n');
 	};
@@ -39,6 +37,24 @@ export default function Edit(props) {
 
 	// Generate the inline styles
 	const inlineStyles = generateInlineStyles();
+
+	const additionalWrapperProps = {};
+
+	const innerBlocksPropsNew = {
+		allowedBlocks: [
+			'noble-performs/masonry-block-section-block',
+			'noble-performs/masonry-block-image-block',
+			'core/paragraph',
+		],
+		orientation: 'vertical',
+	};
+
+	const blockProps = useBlockProps(additionalWrapperProps);
+
+	const { children, ...innerBlocksProps } = useInnerBlocksProps(
+		blockProps,
+		innerBlocksPropsNew
+	);
 
 	return (
 		<>
@@ -78,18 +94,9 @@ export default function Edit(props) {
 				</PanelBody>
 			</InspectorControls>
 
-			{/* Adding the blockPropsId as a classname in order to target it and render the grid in the backend. Frontend markup is much easier to manage. */}
-			<div {...useBlockProps({ className: blockPropsId })}>
-				{/* Output the inline styles */}
+			<div {...innerBlocksProps}>
 				{inlineStyles && <style>{inlineStyles}</style>}
-
-				<InnerBlocks
-					orientation="vertical"
-					allowedBlocks={[
-						'noble-performs/masonry-block-section-block',
-						'noble-performs/masonry-block-image-block',
-					]}
-				/>
+				{children}
 			</div>
 		</>
 	);
