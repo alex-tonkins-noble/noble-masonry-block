@@ -22,9 +22,16 @@ import { isBlobURL, revokeBlobURL } from '@wordpress/blob';
 import convertAspectRatioToPercentage from '../functions/convertAspectRatioToPercentage';
 
 function Edit(props) {
-	const { attributes, setAttributes, noticeOperations, noticeUI } = props;
+	const { attributes, setAttributes, noticeOperations, noticeUI, context } =
+		props;
 	const { size, imageUrl, imageAlt, imageID, aRatio } = attributes;
 	const maxAspectRatioSize = 100;
+
+	const mobileBreakpoint = '769px';
+
+	const testcontext =
+		context['noble-performs/masonry-block-section-block/layout'];
+	console.log(testcontext);
 
 	const [blobURL, setBlobURL] = useState();
 

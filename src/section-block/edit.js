@@ -6,12 +6,12 @@ import {
 	BlockVerticalAlignmentToolbar,
 	useInnerBlocksProps,
 } from '@wordpress/block-editor';
-import { RangeControl, PanelBody } from '@wordpress/components';
+import { RangeControl, PanelBody, ToggleControl } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
 
 export default function Edit(props) {
 	const { attributes, setAttributes } = props;
-	const { size, verticalAlignment } = attributes;
+	const { size, verticalAlignment, layout } = attributes;
 
 	// Define a separate blockId for the backend to target elements for backend styling.
 	const blockPropsId = useBlockProps().id;
@@ -91,6 +91,21 @@ export default function Edit(props) {
 						/>
 						{generateBetterRangeUXSpan(size.colValue)}
 					</div>
+				</PanelBody>
+
+				<PanelBody title={__('Test', 'masonry-block-section-block')}>
+					<ToggleControl
+						label={__(
+							'Keep Layout on Mobile?',
+							'masonry-block-section-block'
+						)}
+						checked={layout}
+						onChange={(newValue) =>
+							setAttributes({
+								value: newValue,
+							})
+						}
+					/>
 				</PanelBody>
 			</InspectorControls>
 

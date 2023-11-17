@@ -47,5 +47,8 @@
 				"denominator": 1
 			}
 		}
-	}
+	},
+	"usesContext": [
+		"noble-performs/masonry-block-section-block/layout"
+	]
 }
