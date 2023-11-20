@@ -73,6 +73,25 @@ function Edit(props) {
 		return finalList;
 	};
 
+	// Function to find the corresponding key or thumbnail size
+	const findImageThumbSize = () => {
+		// If the imageObject does not exist, then exit
+		if (!imageObject) return;
+
+		// Find the corresponding key or thumbnail size
+		for (const key in imageObject.media_details.sizes) {
+			const thumbSize = imageObject.media_details.sizes[key];
+			if (thumbSize.source_url === imageUrl) {
+				return key;
+			}
+		}
+	};
+
+	// Update the key attribute when imageUrl changes
+	useEffect(() => {
+		setAttributes({ imageThumbSize: findImageThumbSize() });
+	}, [imageUrl]);
+
 	const setImage = (img) => {
 		if (!img || !img.url) {
 			resetImage();
@@ -86,21 +105,18 @@ function Edit(props) {
 		});
 	};
 
-	const changeImageSize = (val) => {
-		setAttributes({ imageUrl: val });
-	};
-
-	const setAlt = (val) => {
-		setAttributes({ imageAlt: val });
-	};
-
 	const setInsertedImage = (img) => {
 		resetImage();
 		setAttributes({ imageUrl: img });
 	};
 
 	const resetImage = () => {
-		setAttributes({ imageUrl: undefined, imageAlt: '', imageID: null });
+		setAttributes({
+			imageUrl: undefined,
+			imageAlt: '',
+			imageID: null,
+			imageThumbSize: undefined,
+		});
 	};
 
 	// Save the block ID into an attribute so it can be used in the save file.
@@ -179,7 +195,11 @@ function Edit(props) {
 								'masonry-block-image-block'
 							)}
 							value={imageAlt}
-							onChange={(value) => setAlt(value)}
+							onChange={(value) =>
+								setAttributes({
+									imageAlt: value,
+								})
+							}
 						/>
 					)}
 					{imageID && (
@@ -190,7 +210,11 @@ function Edit(props) {
 							)}
 							value={imageUrl}
 							options={getAvailableImageSizes()}
-							onChange={(value) => changeImageSize(value)}
+							onChange={(value) =>
+								setAttributes({
+									imageUrl: value,
+								})
+							}
 						/>
 					)}
 				</PanelBody>
@@ -245,6 +269,9 @@ function Edit(props) {
 						{generateBetterRangeUXSpan(size.colValue)}
 					</div>
 					<div className="aspect-ratio-wrapper">
+						<label htmlFor="numeratorInput">
+							{__('Aspect Ratio', 'masonry-block-image-block')}
+						</label>
 						<input
 							id="numeratorInput"
 							type="number"
@@ -288,7 +315,7 @@ function Edit(props) {
 							max={maxAspectRatioSize}
 						/>
 
-						<span>
+						<span className="output">
 							{convertAspectRatioToPercentage(
 								aRatio.numerator,
 								aRatio.denominator

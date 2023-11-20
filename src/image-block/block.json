@@ -26,6 +26,10 @@
 		"imageID": {
 			"type": "number"
 		},
+		"imageThumbSize": {
+			"type": "string",
+			"default": "full"
+		},
 		"blockId": {
 			"type": "string"
 		},

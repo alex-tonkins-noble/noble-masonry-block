@@ -53,7 +53,6 @@ export default function Edit(props) {
 		allowedBlocks: [
 			'noble-performs/masonry-block-section-block',
 			'noble-performs/masonry-block-image-block',
-			'core/paragraph',
 		],
 		orientation: 'vertical',
 	};
