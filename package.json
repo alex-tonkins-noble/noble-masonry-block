@@ -12,7 +12,9 @@
 		"lint:js": "wp-scripts lint-js",
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
-		"start": "wp-scripts start"
+		"start": "wp-scripts start",
+		"start:copy-php": "wp-scripts start --webpack-copy-php",
+		"build:copy-php": "wp-scripts build --webpack-copy-php"
 	},
 	"devDependencies": {
 		"@wordpress/eslint-plugin": "^17.3.0",

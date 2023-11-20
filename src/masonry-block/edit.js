@@ -5,11 +5,7 @@ export default function Edit() {
 	const additionalWrapperProps = {};
 
 	const innerBlocksPropsNew = {
-		allowedBlocks: [
-			'noble-performs/masonry-block',
-			'noble-performs/masonry-block-section-block',
-			'core/paragraph',
-		],
+		allowedBlocks: ['noble-performs/masonry-block-section-block'],
 		orientation: 'horizontal',
 	};
 

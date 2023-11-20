@@ -23,7 +23,7 @@
 		},
 		"align": true
 	},
-	"parent": ["noble-performs/masonry-block"],
+	"parent": ["noble-performs/masonry-block-section-block"],
 	"textdomain": "masonry-block-section-block",
 	"attributes": {
 		"blockId": {
@@ -39,5 +39,7 @@
 			"type": "boolean",
 			"default": true
 		}
-	}
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
 }

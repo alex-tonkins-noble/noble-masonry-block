@@ -22,8 +22,7 @@ import { isBlobURL, revokeBlobURL } from '@wordpress/blob';
 import convertAspectRatioToPercentage from '../functions/convertAspectRatioToPercentage';
 
 function Edit(props) {
-	const { attributes, setAttributes, noticeOperations, noticeUI, context } =
-		props;
+	const { attributes, setAttributes, noticeOperations, noticeUI } = props;
 	const { size, imageUrl, imageAlt, imageID, aRatio } = attributes;
 	const maxAspectRatioSize = 100;
 

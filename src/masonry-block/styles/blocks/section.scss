@@ -3,6 +3,7 @@
 .wp-block-noble-performs-masonry-block-section-block {
 	@include grid.initiate-grid();
 	grid-column: span 12;
+	margin: 0;
 
 	&.\--fullwidth-on-mobile {
 		> .wp-block-noble-performs-masonry-block-image-block {

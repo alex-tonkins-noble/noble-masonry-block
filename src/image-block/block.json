@@ -17,15 +17,10 @@
 	"attributes": {
 		"imageUrl": {
 			"type": "string",
-			"source": "attribute",
-			"selector": "img",
-			"attribute": "src"
+			"default": ""
 		},
 		"imageAlt": {
 			"type": "string",
-			"source": "attribute",
-			"attribute": "alt",
-			"selector": "img",
 			"default": ""
 		},
 		"imageID": {
@@ -47,5 +42,7 @@
 				"denominator": 1
 			}
 		}
-	}
+	},
+	"editorScript": "file:./index.js",
+	"render": "./render.php"
 }

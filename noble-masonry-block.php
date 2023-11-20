@@ -20,7 +20,23 @@
  *
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
+
 function create_noble_masonry_block_init() {
-	register_block_type( __DIR__ . '/build' );
+	register_block_type( __DIR__ . '/build/masonry-block' );
+	register_block_type( __DIR__ . '/build/section-block' );
+	register_block_type( __DIR__ . '/build/image-block' );
 }
 add_action( 'init', 'create_noble_masonry_block_init' );
+
+// Function to convert aspect ratio parts to a percentage
+function convertAspectRatioToPercentage($numerator, $denominator) {
+	// Check if the input is valid - if not then return the percentage as 100% (1:1).
+	if (!is_numeric($numerator) || !is_numeric($denominator) || $denominator == 0) {
+		return '100%';
+	}
+
+	// Calculate the percentage based on the ratio parts
+	$percentage = ($numerator / $denominator) * 100;
+
+	return $percentage . '%';
+}
