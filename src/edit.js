@@ -2,9 +2,7 @@ import './editor.scss';
 import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 
 export default function Edit() {
-	const additionalWrapperProps = {
-		className: 'class_number_1',
-	};
+	const additionalWrapperProps = {};
 
 	const innerBlocksPropsNew = {
 		allowedBlocks: [

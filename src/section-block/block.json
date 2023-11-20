@@ -19,7 +19,7 @@
 			"link": true
 		},
 		"layout": {
-			"allowVerticalAlignment": true
+			"allowVerticalAlignment": false
 		},
 		"align": true
 	},
@@ -35,16 +35,9 @@
 				"colValue": 12
 			}
 		},
-		"verticalAlignment" : {
-			"type": "string",
-			"default": null
-		},
-		"layout": {
+		"keepLayoutOnMobile": {
 			"type": "boolean",
 			"default": true
 		}
-	},
-	"providesContext": {
-		"noble-performs/masonry-block-section-block/layout": "layout"
 	}
 }

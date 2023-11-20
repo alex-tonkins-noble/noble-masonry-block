@@ -27,12 +27,6 @@ function Edit(props) {
 	const { size, imageUrl, imageAlt, imageID, aRatio } = attributes;
 	const maxAspectRatioSize = 100;
 
-	const mobileBreakpoint = '769px';
-
-	const testcontext =
-		context['noble-performs/masonry-block-section-block/layout'];
-	console.log(testcontext);
-
 	const [blobURL, setBlobURL] = useState();
 
 	// Define a separate blockId for the backend to target elements for backend styling.
@@ -149,7 +143,6 @@ function Edit(props) {
 			aRatio.denominator
 		)}`;
 
-		// Very different markup to the save function due to how WordPress generates the markup of the backend.
 		styles.push(`#${blockPropsId} { ${colStyle}; ${paddingStyle}; } `);
 
 		return styles.join('\n');
@@ -173,13 +166,18 @@ function Edit(props) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={__('Image Settings', 'team-member-block')}>
+				<PanelBody
+					title={__('Image Settings', 'masonry-block-image-block')}
+				>
 					{imageUrl && !isBlobURL(imageUrl) && (
 						<TextareaControl
-							label={__('Custom Alt Text', 'team-member-block')}
+							label={__(
+								'Custom Alt Text',
+								'masonry-block-image-block'
+							)}
 							help={__(
 								'Override the default alt text of the image here.',
-								'team-member-block'
+								'masonry-block-image-block'
 							)}
 							value={imageAlt}
 							onChange={(value) => setAlt(value)}
@@ -187,7 +185,10 @@ function Edit(props) {
 					)}
 					{imageID && (
 						<SelectControl
-							label={__('Image Size', 'team-member-block')}
+							label={__(
+								'Image Size',
+								'masonry-block-image-block'
+							)}
 							value={imageUrl}
 							options={getAvailableImageSizes()}
 							onChange={(value) => changeImageSize(value)}
@@ -209,27 +210,30 @@ function Edit(props) {
 						/>
 						<ToolbarButton
 							icon={'trash'}
-							label={__('Remove Image', 'team-member-block')}
+							label={__(
+								'Remove Image',
+								'masonry-block-image-block'
+							)}
 							onClick={() => resetImage()}
 						>
-							{__('Remove Image', 'team-member-block')}
+							{__('Remove Image', 'masonry-block-image-block')}
 						</ToolbarButton>
 					</BlockControls>
 				)}
 
 				<PanelBody
-					title={__('Section Size', 'masonry-block-section-block')}
+					title={__('Section Size', 'masonry-block-image-block')}
 				>
 					<p className="info-tagline">
 						{__(
 							'Specify the default width of your section.',
-							'masonry-block-section-block'
+							'masonry-block-image-block'
 						)}
 					</p>
 
 					<div className="better-range-styling-wrapper">
 						<RangeControl
-							label={__('Width', 'masonry-block-section-block')}
+							label={__('Width', 'masonry-block-image-block')}
 							value={size.colValue}
 							onChange={(newValue) =>
 								setAttributes({

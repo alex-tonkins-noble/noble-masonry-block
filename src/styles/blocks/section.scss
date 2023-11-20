@@ -2,4 +2,13 @@
 
 .wp-block-noble-performs-masonry-block-section-block {
 	@include grid.initiate-grid();
+	grid-column: span 12;
+
+	&.\--fullwidth-on-mobile {
+		> .wp-block-noble-performs-masonry-block-image-block {
+			@media (max-width: 769px) {
+				grid-column: span 12 !important;
+			}
+		}
+	}
 }

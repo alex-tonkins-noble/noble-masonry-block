@@ -1,9 +1,7 @@
 import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 
-export default function BlockSave() {
-	const additionalWrapperProps = {
-		className: 'class_number_1',
-	};
+export default function save() {
+	const additionalWrapperProps = {};
 
 	const blockProps = useBlockProps.save(additionalWrapperProps);
 	const { children, ...innerBlocksProps } =

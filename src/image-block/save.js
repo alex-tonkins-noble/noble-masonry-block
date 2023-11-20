@@ -1,7 +1,7 @@
 import { useBlockProps } from '@wordpress/block-editor';
 import convertAspectRatioToPercentage from '../functions/convertAspectRatioToPercentage';
 
-export default function Save(props) {
+export default function save(props) {
 	const { attributes } = props;
 	const { blockId, size, imageUrl, imageAlt, imageID, aRatio } = attributes;
 
@@ -24,7 +24,6 @@ export default function Save(props) {
 
 	return (
 		<div id={blockId} {...useBlockProps.save()}>
-			{/* Output the inline styles */}
 			{inlineStyles && <style>{inlineStyles}</style>}
 
 			{imageUrl && (

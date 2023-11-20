@@ -2,8 +2,6 @@ import { __ } from '@wordpress/i18n';
 import {
 	useBlockProps,
 	InspectorControls,
-	BlockControls,
-	BlockVerticalAlignmentToolbar,
 	useInnerBlocksProps,
 } from '@wordpress/block-editor';
 import { RangeControl, PanelBody, ToggleControl } from '@wordpress/components';
@@ -11,7 +9,14 @@ import { useEffect } from '@wordpress/element';
 
 export default function Edit(props) {
 	const { attributes, setAttributes } = props;
-	const { size, verticalAlignment, layout } = attributes;
+	const { size, keepLayoutOnMobile } = attributes;
+
+	let mobileLayoutClass = '';
+	if (!keepLayoutOnMobile) {
+		mobileLayoutClass = '--fullwidth-on-mobile';
+	}
+
+	const mobileBreakpoint = '769px';
 
 	// Define a separate blockId for the backend to target elements for backend styling.
 	const blockPropsId = useBlockProps().id;
@@ -25,8 +30,12 @@ export default function Edit(props) {
 	const generateInlineStyles = () => {
 		const styles = [];
 
-		// Very different markup to the save function due to how WordPress generates the markup of the backend.
-		styles.push(`#${blockPropsId} { grid-column: span ${size.colValue}; }`);
+		const colStyle = `grid-column: span ${size.colValue}`;
+
+		// Sections are forced fullwidth on mobile.
+		styles.push(
+			`@media (min-width: ${mobileBreakpoint}) { #${blockPropsId} { ${colStyle}; } }`
+		);
 
 		return styles.join('\n');
 	};
@@ -38,7 +47,7 @@ export default function Edit(props) {
 	// Generate the inline styles
 	const inlineStyles = generateInlineStyles();
 
-	const additionalWrapperProps = {};
+	const additionalWrapperProps = { className: `${mobileLayoutClass}` };
 
 	const innerBlocksPropsNew = {
 		allowedBlocks: [
@@ -58,15 +67,6 @@ export default function Edit(props) {
 
 	return (
 		<>
-			<BlockControls>
-				<BlockVerticalAlignmentToolbar
-					value={verticalAlignment}
-					onChange={(value) => {
-						setAttributes({ verticalAlignment: value });
-					}}
-				/>
-			</BlockControls>
-
 			<InspectorControls>
 				<PanelBody
 					title={__('Section Size', 'masonry-block-section-block')}
@@ -93,18 +93,22 @@ export default function Edit(props) {
 					</div>
 				</PanelBody>
 
-				<PanelBody title={__('Test', 'masonry-block-section-block')}>
+				<PanelBody title={__('Layout', 'masonry-block-section-block')}>
 					<ToggleControl
 						label={__(
 							'Keep Layout on Mobile?',
 							'masonry-block-section-block'
 						)}
-						checked={layout}
+						checked={keepLayoutOnMobile}
 						onChange={(newValue) =>
 							setAttributes({
-								value: newValue,
+								keepLayoutOnMobile: newValue,
 							})
 						}
+						help={__(
+							'By default the images will go fullwidth on Mobile devices. Tick this to keep the layout you have given them. (TIP: Preview the mobile view in the top toolbar!)',
+							'masonry-block-section-block'
+						)}
 					/>
 				</PanelBody>
 			</InspectorControls>

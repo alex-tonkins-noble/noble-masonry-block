@@ -1,18 +1,25 @@
 import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 
-export default function Save(props) {
+export default function save(props) {
 	const { attributes } = props;
-	const { blockId, size, verticalAlignment } = attributes;
+	const { blockId, size, keepLayoutOnMobile } = attributes;
 
-	const vAlignmentClass = verticalAlignment
-		? `is-vertically-aligned-${verticalAlignment}`
-		: '';
+	let mobileLayoutClass = '';
+	if (!keepLayoutOnMobile) {
+		mobileLayoutClass = '--fullwidth-on-mobile';
+	}
+
+	const mobileBreakpoint = '769px';
 
 	// Generate the inline styles
 	const generateInlineStyles = () => {
 		const styles = [];
 
-		styles.push(`#${blockId} { grid-column: span ${size.colValue}; }`);
+		const colStyle = `grid-column: span ${size.colValue}`;
+
+		styles.push(
+			`@media (min-width: ${mobileBreakpoint}) { #${blockId} { ${colStyle}; } }`
+		);
 
 		return styles.join('\n');
 	};
@@ -20,7 +27,7 @@ export default function Save(props) {
 	const inlineStyles = generateInlineStyles();
 
 	const additionalWrapperProps = {
-		className: `class_number_2 ${vAlignmentClass}`,
+		className: `${mobileLayoutClass}`,
 	};
 
 	const blockProps = useBlockProps.save(additionalWrapperProps);
