@@ -19,7 +19,7 @@ $numerator = $ratio && $ratio['numerator'] ? $ratio['numerator'] : null;
 $denominator = $ratio && $ratio['denominator'] ? $ratio['denominator'] : null;
 
 $colStyle = "grid-column: span {$colValue}";
-$paddingStyle = "padding-bottom: " . convertAspectRatioToPercentage($numerator, $numerator);
+$paddingStyle = "padding-bottom: " . convertAspectRatioToPercentage($numerator, $denominator);
 
 $styles = "#{$blockPropsId} { {$colStyle}; {$paddingStyle}; }";
 
